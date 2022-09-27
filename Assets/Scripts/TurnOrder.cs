@@ -18,8 +18,8 @@ public class TurnOrder : MonoBehaviour
 
 
     [SerializeField] string action1 = "Move";
-    [SerializeField] string action2 = "Shoot";
-    [SerializeField] string action3;
+    [SerializeField] string action2 = "Attack";
+    [SerializeField] string action3 = "Shoot";
     [SerializeField] string action4;
 
 

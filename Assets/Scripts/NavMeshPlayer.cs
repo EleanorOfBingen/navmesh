@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.XR;
 
 public class NavMeshPlayer : MonoBehaviour
 {
@@ -28,13 +29,16 @@ public class NavMeshPlayer : MonoBehaviour
     [SerializeField]private int layerDefault;
     [SerializeField] private int layerPlayer;
 
-    private float distance;
+    [SerializeField] private float distance;
     Vector2 positiontoTravellVector;
     Vector2 playerVector;
 
 
     private float timer;
     private float maxTimer = 10;
+    private bool attack;
+
+    [SerializeField] private GameObject attackedThingy;
 
     void Start()
     {
@@ -63,6 +67,9 @@ public class NavMeshPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit hit;
+
+       
         if(moveTime)
         {
 
@@ -73,6 +80,32 @@ public class NavMeshPlayer : MonoBehaviour
 
             timer -= Time.deltaTime;
         }
+
+
+        if (attack)
+        {
+            if (Physics.Raycast(transform.position, attackedThingy.transform.position - transform.position, out hit, 1.5f))
+            {
+                if (hit.collider.gameObject == attackedThingy)
+                {
+
+                    Debug.Log("CockMother");
+
+                    attackedThingy.GetComponent<Health>().IlooseHealth(1);
+                    positionToTravell = transform.position;// agent.SetDestination(transform.position);
+                    moveTime = false;
+                    attack = false;
+                    //
+
+                }
+
+
+
+
+            }
+        }
+
+
 
         distance = Vector3.Distance(transform.position, new Vector3(positionToTravell.x, transform.position.y, transform.position.z));
 
@@ -89,7 +122,37 @@ public class NavMeshPlayer : MonoBehaviour
        
 
 
-            }
+        }
+
+        //if (attack && distance < 0.1)
+        //{
+
+        //    Debug.Log("Cock");
+        //    moveTime = false;
+
+        //    attackedThingy.GetComponent<Health>().IlooseHealth(1);
+        //    attack = false;
+
+
+        //}
+
+
+
+        //if (Physics.Raycast(transform.position, attackedThingy.transform.position - transform.position, out hit, 2f))
+        //{
+        //    if (hit.collider.gameObject == attackedThingy)
+        //    {
+
+        //        Debug.Log("CockMother");
+
+
+        //    }
+
+
+
+
+        //}
+
 
 
         //TurnOrder.WormCount(ImDone());
@@ -179,17 +242,42 @@ public class NavMeshPlayer : MonoBehaviour
         DestoryChild();
     }
 
-    
+    public void  WhoiAttack(GameObject whom)
+    {
+
+        Debug.Log(whom.name);
+
+        attackedThingy = whom;
+        attack = true;
+        //positionToTravell = whom.transform.position;
+        MovePosition(whom.transform.position);
+       // return attackedThingy;
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+        
+    //    if (collision.gameObject == attackedThingy)
+    //    {
+
+    //        Debug.Log("cockmuther");
+
+    //    }
+
+
+    //}
+
+
 
 
     //public void WhatLayerAmI()
     //{
-     
+
     //    if (gameObject.tag == TurnOrder.CurrentPlayerName())
     //    {
     //        gameObject.layer = layerDefault;
 
-            
+
 
     //    }
     //    if(gameObject.tag != TurnOrder.CurrentPlayerName())
@@ -207,7 +295,7 @@ public class NavMeshPlayer : MonoBehaviour
     public int ImDone()
     {
 
-        if (playerVector == positiontoTravellVector || timer < 0)
+        if (moveTime == false|| timer < 0)
         {
 
 

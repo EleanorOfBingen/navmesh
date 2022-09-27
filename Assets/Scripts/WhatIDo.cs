@@ -11,13 +11,16 @@ public class WhatIDo : MonoBehaviour
 
     private Shooter shooter;
     private NavMeshPlayer nmp;
+    private Attack attack;
+
+    [SerializeField] private string WhatTypeAmAI;
 
     private void Start()
     {
 
         shooter = GetComponent<Shooter>();
         nmp = GetComponent<NavMeshPlayer>();
-
+        attack = GetComponent<Attack>();
 
 
     }
@@ -43,7 +46,17 @@ public class WhatIDo : MonoBehaviour
         //Shoot
         if(action == TurnOrder.Action2())
         {
-            shooter.Shoot();
+
+            if (WhatTypeAmAI == "Canon")
+            {
+                shooter.Shoot();
+            }
+            else
+            {
+                nmp.MoveWorm();
+
+
+            }
 
 
         }
@@ -69,6 +82,12 @@ public class WhatIDo : MonoBehaviour
 
 
 
+    }
+    public string WhatAmI()
+    {
+
+
+        return WhatTypeAmAI;
     }
 
 

@@ -89,7 +89,7 @@ public class ControllerNavMesh : MonoBehaviour
         else if(pressedDown)
         {
 
-            lrc.LineRenderPositions(currentWorm.transform.position, hitvector, AmIOutOfRange(maxDistance, ihitwall));
+            lrc.LineRenderPositions(currentWorm.transform.position, hitvector, AmIOutOfRange("", ihitwall));
 
 
         }
@@ -172,7 +172,7 @@ public class ControllerNavMesh : MonoBehaviour
                         
 
                     }
-                    lrc.LineRenderPositions(currentWorm.transform.position, hit.collider.gameObject.transform.position, AmIOutOfRange(shootDistance, ihitwall));
+                    lrc.LineRenderPositions(currentWorm.transform.position, hit.collider.gameObject.transform.position, AmIOutOfRange(wid.WhatAmI(), ihitwall));
                 }
                 else
                 {
@@ -209,7 +209,7 @@ public class ControllerNavMesh : MonoBehaviour
             else
             {
 
-                lrc.LineRenderPositions(currentWorm.transform.position, currentWorm.transform.position, AmIOutOfRange(maxDistance, false));
+                lrc.LineRenderPositions(currentWorm.transform.position, currentWorm.transform.position, AmIOutOfRange("", false));
 
             }
 
@@ -225,12 +225,12 @@ public class ControllerNavMesh : MonoBehaviour
 
                 if (iShoot)
                 {
-                    if (!AmIOutOfRange(shootDistance, ihitwall))
+                    if (!AmIOutOfRange(wid.WhatAmI(), ihitwall))
                     {
 
 
 
-                        PointOfShot(hit.collider.gameObject);
+                        PointOfShot(hit.collider.gameObject, wid.WhatAmI());
 
                     }
 
@@ -244,7 +244,7 @@ public class ControllerNavMesh : MonoBehaviour
                     //}
 
                 }
-                else if (!AmIOutOfRange(maxDistance, ihitwall))
+                else if (!AmIOutOfRange("", ihitwall))
                 {
 
                     InstantatePointOfMovement(hit.point);
@@ -319,16 +319,27 @@ public class ControllerNavMesh : MonoBehaviour
 
     }
 
-    void PointOfShot(GameObject targetWorm)
+    void PointOfShot(GameObject targetWorm, string playerType)
     {
+        if (playerType == "Canon")
+        {
+            currentWorm.GetComponent<Shooter>().WhoAmIShooting(targetWorm);
+           
+        }
+        else
+        {
+            //nmp.MovePosition(targetWorm.transform.position);
+            nmp.WhoiAttack(targetWorm);
 
-        currentWorm.GetComponent<Shooter>().WhoAmIShooting(targetWorm);
+        }
+
         wid.WhatActionDoIDo(TurnOrder.Action2());
 
+        // wid.WhatActionDoIDo(TurnOrder.Action2());
 
     }
 
-    bool AmIOutOfRange(float MDistance, bool hittWall)
+    bool AmIOutOfRange(string playerType, bool hittWall)
     {
 
         //if (Mdistance == maxDistance && hit.collider.tag != "underground")
@@ -344,31 +355,25 @@ public class ControllerNavMesh : MonoBehaviour
         //    return distance > MDistance;
 
         //}
-        if (MDistance == shootDistance && hittWall)
+        if (playerType == "Canon" && hittWall)
         {
 
             return true;
 
-        }else if (MDistance == shootDistance && !hittWall)
+        }else if (playerType == "Canon" && !hittWall)
         {
 
 
-            return distance > MDistance;
+            return distance > shootDistance;
         }
-
-
-        if(MDistance == maxDistance)
+        else
         {
 
-            return distance > MDistance;
+            return distance > maxDistance;
 
         }
-        else 
-        {
+        
 
-            return true;
-
-        }
 
 
         
