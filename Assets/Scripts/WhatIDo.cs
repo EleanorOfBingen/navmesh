@@ -74,8 +74,17 @@ public class WhatIDo : MonoBehaviour
         }
         if (action == TurnOrder.Action2())
         {
+            if (WhatTypeAmAI == "Canon")
+            {
+                return GetComponent<Shooter>().ShotsDone();
+            }
+            else
+            {
+                return GetComponent<NavMeshPlayer>().ImDone();
 
-            return GetComponent<Shooter>().ShotsDone();
+
+            }
+           // return GetComponent<Shooter>().ShotsDone();
 
         }
         return 0;

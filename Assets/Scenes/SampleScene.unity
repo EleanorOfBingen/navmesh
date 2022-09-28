@@ -979,6 +979,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7694941388563605262, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 333544716644412369, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1696,6 +1700,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2865330374045143241, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 7718987101671854243, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1907,6 +1915,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7694941388563605262, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 333544716644412369, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2069,6 +2081,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3977096122088566, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 926607878405022446, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2134,6 +2150,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7694941388563605262, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 333544716644412369, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2203,6 +2223,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1643438541752928692, guid: 993db6d456b7a4d4e806c0b1662b85aa, type: 3}
+    - target: {fileID: -1996145540665858592, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 2156821339157608744, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -2549,6 +2573,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1996145540665858592, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 2156821339157608744, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -3337,6 +3365,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7694941388563605262, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 333544716644412369, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4073,6 +4105,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3977096122088566, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 926607878405022446, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4260,6 +4296,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3977096122088566, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 926607878405022446, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -4987,6 +5027,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1996145540665858592, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 2156821339157608744, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5357,6 +5401,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2865330374045143241, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 7718987101671854243, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5374,6 +5422,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1996145540665858592, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 2156821339157608744, guid: 919719bc3e47bb4488ddd5e2a2f19e6d, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -5662,6 +5714,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2865330374045143241, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 7718987101671854243, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5776,6 +5832,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7694941388563605262, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 333544716644412369, guid: 52faa53bccc3b3848997ecf21f392b87, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5893,6 +5953,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2865330374045143241, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 7718987101671854243, guid: bc61e3ba5edd9ce4189e90b02dc6aed9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5910,6 +5974,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3977096122088566, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
+      propertyPath: WhatTypeAmAI
+      value: Canon
+      objectReference: {fileID: 0}
     - target: {fileID: 926607878405022446, guid: bfd6d24af12fd424bb46919fa8233d31, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

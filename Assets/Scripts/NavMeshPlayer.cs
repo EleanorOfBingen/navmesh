@@ -92,10 +92,10 @@ public class NavMeshPlayer : MonoBehaviour
                     Debug.Log("CockMother");
 
                     attackedThingy.GetComponent<Health>().IlooseHealth(1);
-                    positionToTravell = transform.position;// agent.SetDestination(transform.position);
-                    moveTime = false;
+                    agent.SetDestination(transform.position); // agent.SetDestination(transform.position);
+                    //moveTime = false;
                     attack = false;
-                    //
+                    
 
                 }
 
@@ -295,7 +295,7 @@ public class NavMeshPlayer : MonoBehaviour
     public int ImDone()
     {
 
-        if (moveTime == false|| timer < 0)
+        if (playerVector == positiontoTravellVector && attack == false)
         {
 
 
