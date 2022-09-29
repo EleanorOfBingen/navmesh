@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: -6414361290333171667}
   - component: {fileID: 3977096122088566}
   - component: {fileID: 3414955289380487822}
+  - component: {fileID: -8278902501027978610}
   m_Layer: 3
   m_Name: Player 2
   m_TagString: Player1
@@ -434,6 +435,8 @@ MonoBehaviour:
   positionToTravell: {x: 0, y: 0, z: 0}
   layerDefault: 0
   layerPlayer: 0
+  distance: 0
+  attackedThingy: {fileID: 0}
 --- !u!114 &-6414361290333171667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,6 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: Move
+  WhatTypeAmAI: 
 --- !u!114 &3414955289380487822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,3 +481,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   healthBarScript: {fileID: 7557322058197484187}
+--- !u!114 &-8278902501027978610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6725188725573089632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06aa761fec3e67e488a055fff90b26a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

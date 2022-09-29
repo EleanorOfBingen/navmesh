@@ -114,7 +114,7 @@ public class NavMeshPlayer : MonoBehaviour
 
          playerVector = new Vector2(transform.position.x, transform.position.z);
 
-        if (playerVector == positiontoTravellVector || timer < 0 )
+        if (ImAtLocation())
         {
 
 
@@ -295,7 +295,7 @@ public class NavMeshPlayer : MonoBehaviour
     public int ImDone()
     {
 
-        if (playerVector == positiontoTravellVector && attack == false)
+        if (ImAtLocation() && attack == false || timer < 0)
         {
 
 
@@ -307,6 +307,20 @@ public class NavMeshPlayer : MonoBehaviour
 
 
        
+    }
+
+    public bool ImAtLocation()
+    {
+
+      
+
+
+      return  playerVector == positiontoTravellVector;
+
+
+
+        
+
     }
 
 

@@ -19,7 +19,7 @@ public class TurnOrder : MonoBehaviour
 
     [SerializeField] string action1 = "Move";
     [SerializeField] string action2 = "Attack";
-    [SerializeField] string action3 = "Shoot";
+    [SerializeField] string action3 = "Dig";
     [SerializeField] string action4;
 
 
@@ -194,6 +194,14 @@ public class TurnOrder : MonoBehaviour
         return tO.action2;
 
     }
+    public static string Action3()
+    {
+
+        TurnOrder tO = GetInstance();
+        return tO.action3;
+
+    }
+
 
     public static GameObject FocusedWurm(int wurmNmr)
     {

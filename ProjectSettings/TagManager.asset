@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - Player3
   - Destroyable
+  - Hole
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,7 @@ public class WhatIDo : MonoBehaviour
     private Shooter shooter;
     private NavMeshPlayer nmp;
     private Attack attack;
+    private Dig diggin;
 
     [SerializeField] private string WhatTypeAmAI;
 
@@ -21,7 +22,7 @@ public class WhatIDo : MonoBehaviour
         shooter = GetComponent<Shooter>();
         nmp = GetComponent<NavMeshPlayer>();
         attack = GetComponent<Attack>();
-
+        diggin = GetComponent<Dig>();
 
     }
 
@@ -60,6 +61,12 @@ public class WhatIDo : MonoBehaviour
 
 
         }
+        if(action == TurnOrder.Action3())
+        {
+            diggin.MoveTowardsDiggin();
+
+
+        }
 
 
     }
@@ -85,6 +92,13 @@ public class WhatIDo : MonoBehaviour
 
             }
            // return GetComponent<Shooter>().ShotsDone();
+
+        }
+
+        if (action == TurnOrder.Action3())
+        {
+
+            return GetComponent<Dig>().DiggingDone();
 
         }
         return 0;
