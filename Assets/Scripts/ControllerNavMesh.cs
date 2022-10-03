@@ -320,7 +320,7 @@ public class ControllerNavMesh : MonoBehaviour
                     if (imGoingToEnterDigHole)
                     {
                         digHole = hit.collider.gameObject;
-
+                        digHole.GetComponent<HoleTeleport>().AddToList(currentWorm);
 
 
                     }

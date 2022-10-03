@@ -24,11 +24,17 @@ public class Dig : MonoBehaviour
     private float maxtimmer;
 
     [SerializeField] private GameObject hole;
-    
+
+    private float[] directionMovement;
+ 
+
 
     void Start()
     {
-        
+
+        directionMovement = new float[]{-1.5f,-1,1,1.5f};
+       
+
         nma = GetComponent<NavMeshAgent>();
         nmPlayer = GetComponent<NavMeshPlayer>();
 
@@ -85,7 +91,7 @@ public class Dig : MonoBehaviour
         if (digginDone)
         {
 
-            nmPlayer.MovePosition(digExit + new Vector3(Random.Range(-1,1),0, Random.Range(-1, 1)));
+            nmPlayer.MovePosition(digExit + new Vector3(directionMovement[Random.Range(0,directionMovement.Length)],0, directionMovement[Random.Range(0, directionMovement.Length)]));
             nmPlayer.MoveWorm();
             
             CreateDigginHoles();
