@@ -5,19 +5,20 @@ using UnityEngine.AI;
 
 public class HoleTeleport : MonoBehaviour
 {
-
-    private List<GameObject> digginDwarfs;
+    private NavMeshPlayer nmPlayer;
+    public List<GameObject> digginDwarfs;
 
     [SerializeField]private Vector3 digExit;
 
 
     private NavMeshAgent nma;
-
+    private float[] directionMovement;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        directionMovement = new float[] { -1.5f, -1, 1, 1.5f };
+
     }
 
     // Update is called once per frame
@@ -26,13 +27,16 @@ public class HoleTeleport : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
+        
         if (digginDwarfs.Contains(collision.gameObject))
         {
-
+            Debug.Log("diggydiggyhole");
             nma = collision.GetComponent<NavMeshAgent>();
             nma.Warp(digExit);
+            nmPlayer = collision.GetComponent<NavMeshPlayer>();
+            nmPlayer.MovePosition(digExit + new Vector3(directionMovement[Random.Range(0, directionMovement.Length)], 0, directionMovement[Random.Range(0, directionMovement.Length)]));
             digginDwarfs.Remove(collision.gameObject);
 
 
@@ -50,11 +54,23 @@ public class HoleTeleport : MonoBehaviour
         return digExit;
     }
 
-    public void AddToList(GameObject dwarfToDig)
+    public void AddToList(GameObject CurrentDwarf)
     {
 
+        Debug.Log(CurrentDwarf);
+        digginDwarfs.Add(CurrentDwarf);
 
-        digginDwarfs.Add(dwarfToDig);
+    }
+
+    public void RemoveToList(GameObject DwarfCurrent)
+    {
+        if (digginDwarfs.Contains(DwarfCurrent))
+        {
+
+            digginDwarfs.Remove(DwarfCurrent);
+
+        }
+
 
     }
     

@@ -52,8 +52,8 @@ public class ControllerNavMesh : MonoBehaviour
     [SerializeField] private bool dig;
     private bool digLocationPlaced;
     private Vector3 digLocation;
-    private bool imGoingToEnterDigHole;
-    private GameObject digHole;
+    [SerializeField] private bool imGoingToEnterDigHole;
+    [SerializeField] private GameObject digHole;
     private HoleTeleport ht;
 
     private Dig digger;
@@ -197,11 +197,11 @@ public class ControllerNavMesh : MonoBehaviour
 
                 // SetActiveAimer(playerPoint);
 
-                if(hit.collider.tag == "Hole")
+                if (hit.collider.tag == "Hole")
                 {
                     //digHole = hit.collider.gameObject;
                     imGoingToEnterDigHole = true;
-                    lrc.LineRenderPositions(currentWorm.transform.position, hit.collider.gameObject.transform.position, AmIOutOfRange("", ihitwall));
+                    //lrc.LineRenderPositions(currentWorm.transform.position, hit.collider.gameObject.transform.position, AmIOutOfRange("", ihitwall));
 
                 }
                 else
@@ -286,77 +286,112 @@ public class ControllerNavMesh : MonoBehaviour
 
 
 
-            if (Input.GetMouseButtonUp(0) && hitPlayer)
+            if (Input.GetMouseButtonUp(0))
             {
-
-
-                /// CHEK IF I HIT SOMETHING ELENOR
-       
-
-                if (iShoot)
+                if (pressedDown)
                 {
-                    if (!AmIOutOfRange(wid.WhatAmI(), ihitwall))
+                    Debug.Log("YEE");
+                    /// CHEK IF I HIT SOMETHING ELENOR
+
+
+                    pressedDown = false;
+
+                    TurnOfCollider(false);
+
+
+                    if (iShoot)
                     {
+                        if (!AmIOutOfRange(wid.WhatAmI(), ihitwall))
+                        {
 
 
 
-                        PointOfShot(hit.collider.gameObject, wid.WhatAmI());
+                            PointOfShot(hit.collider.gameObject, wid.WhatAmI());
+
+                        }
+
+                        //if (!iShoot)
+                        //{
+
+
+
+
+                        //    InstantatePointOfMovement(hit.point);
+                        //}
+
+                    }
+                    else if (!AmIOutOfRange("", ihitwall))
+                    {
+                        if (imGoingToEnterDigHole)
+                        {
+
+                            digHole = hit.collider.gameObject;
+                            Debug.Log("HighTide");
+                            digHole.GetComponent<HoleTeleport>().AddToList(currentWorm);
+
+
+
+
+
+                        }
+                        else if(digHole != null)
+                        {
+                            digHole = hit.collider.gameObject;
+                            digHole.GetComponent<HoleTeleport>().RemoveToList(currentWorm);
+
+
+                        }
+                        
+                        InstantatePointOfMovement(hit.point);
+                        //if (imGoingToEnterDigHole)
+                        //{
+                        //    digHole = hit.collider.gameObject;
+                        //    digHole.GetComponent<HoleTeleport>().AddToList(currentWorm);
+
+                        //    InstantatePointOfMovement(hit.point);
+                        //}
+                        //else
+                        //{
+
+                        //    InstantatePointOfMovement(hit.point);
+
+                        //}
+
+                        // InstantatePointOfMovement(hit.point);
+
+
 
                     }
 
-                    //if (!iShoot)
-                    //{
-
-
-
-
-                    //    InstantatePointOfMovement(hit.point);
-                    //}
-
-                }
-                else if (!AmIOutOfRange("", ihitwall))
-                {
-
-                    if (imGoingToEnterDigHole)
+                    else
                     {
-                        digHole = hit.collider.gameObject;
-                        digHole.GetComponent<HoleTeleport>().AddToList(currentWorm);
+
+                        InstantatePointOfMovement(currentWorm.transform.position);
+
 
 
                     }
+                   
 
-                    InstantatePointOfMovement(hit.point);
+                   
 
+                    // moveAimer.SetActive(false);
 
+                    //    worms = GameObject.FindGameObjectsWithTag(TurnOrder.CurrentPlayerName());
 
+                    //    foreach (GameObject worm in worms)
+                    //    {
+
+                    //        worm.GetComponent<BoxCollider>().enabled = true;
+
+                    //    }
                 }
-                
-                else
-                {
-
-                    InstantatePointOfMovement(currentWorm.transform.position);
-
-
-
-                }
-
-
-
-
-               // moveAimer.SetActive(false);
-                hitPlayer = false;
-                pressedDown = false;
+               
 
                 TurnOfCollider(false);
-                //    worms = GameObject.FindGameObjectsWithTag(TurnOrder.CurrentPlayerName());
-
-                //    foreach (GameObject worm in worms)
-                //    {
-
-                //        worm.GetComponent<BoxCollider>().enabled = true;
-
-                //    }
-                }
+                hitPlayer = false;
+                pressedDown = false;
+            }
 
 
             }
@@ -392,6 +427,8 @@ public class ControllerNavMesh : MonoBehaviour
         nmp.MovePosition(positionInstantiate);
         wid.WhatActionDoIDo(TurnOrder.Action1());
 
+
+        //hitPlayer = false;
         // pointOFMovement.transform.parent = currentWorm.transform;
 
 
@@ -425,7 +462,7 @@ public class ControllerNavMesh : MonoBehaviour
         wid.WhatActionDoIDo(TurnOrder.Action2());
 
         // wid.WhatActionDoIDo(TurnOrder.Action2());
-
+        //hitPlayer = false;
     }
 
     bool AmIOutOfRange(string playerType, bool hittWall)

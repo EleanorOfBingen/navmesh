@@ -128,6 +128,7 @@ public class TurnOrder : MonoBehaviour
         {
             worms += 1;
             worm.GetComponent<WhatIDo>().InstantiateAction();
+            worm.GetComponent<WhatIDo>().WhatActionDoIDo(action1);
             //worm.GetComponent<NavMeshPlayer>().WhatLayerAmI();
            
 
@@ -136,7 +137,8 @@ public class TurnOrder : MonoBehaviour
 
         currentPlayer += 1;
         currentPlayer %= currentAmountOfPlayers;
-       //
+        
+
         endTurn = false;
 
     }
