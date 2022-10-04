@@ -22,6 +22,9 @@ public class CameraController : MonoBehaviour
     [SerializeField] private GameObject[] cubes;
     [SerializeField] private int wurmInt;
 
+
+    private GameObject followingWurm;
+
     private Transform initalTransform;
 
     private bool startvalue;
@@ -89,7 +92,7 @@ public class CameraController : MonoBehaviour
             else
             {
 
-                cvc.Follow = cubes[wurmInt].transform;
+                cvc.Follow = followingWurm.transform;
 
                 if (startvalue)
                 {
@@ -99,18 +102,18 @@ public class CameraController : MonoBehaviour
 
             }
 
-            if (Input.GetKeyUp(KeyCode.LeftArrow))
-            {
-                wurmInt -= 1;
+            //if (Input.GetKeyUp(KeyCode.LeftArrow))
+            //{
+            //    wurmInt -= 1;
 
 
-            }
-            if (Input.GetKeyUp(KeyCode.RightArrow))
-            {
-                wurmInt += 1;
+            //}
+            //if (Input.GetKeyUp(KeyCode.RightArrow))
+            //{
+            //    wurmInt += 1;
 
 
-            }
+            //}
         
 
 
@@ -155,6 +158,14 @@ public class CameraController : MonoBehaviour
 
 
             //cvc.Follow = cubes[0].transform;
+
+    }
+
+    public void ChangeFocus(GameObject follow)
+    {
+
+        followingWurm = follow;
+
 
     }
 

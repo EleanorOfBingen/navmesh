@@ -58,21 +58,33 @@ public class ControllerNavMesh : MonoBehaviour
 
     private Dig digger;
 
+
+    private GameObject[] currentAmountWurms;
+
+    [SerializeField] private CameraController cc;
+
+    private int wurmInt;
+
+    private int whatIAmInt;
+
     //RaycastHit hit;
     // Start is called before the first frame update
     void Start()
     {
+
+
         lrc = GetComponent<LineRendCon>();
         //moveAimer = Instantiate(aimer);
         //moveAimer.SetActive(false);
-
+       
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        wurmInt = Mathf.Clamp(wurmInt, 0, (currentAmountWurms.Length - 1));
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Vector3 hitvector = coursor.transform.position;
         //RaycastHit hit2;
@@ -87,7 +99,37 @@ public class ControllerNavMesh : MonoBehaviour
 
         //}
 
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            wurmInt -= 1;
+            Focus(currentAmountWurms[wurmInt]);
 
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            wurmInt += 1;
+            Focus(currentAmountWurms[wurmInt]);
+
+
+        }
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+
+            wid.ChangeType(1);
+            nmp.DestoryChild();
+            InstantatePointOfMovement(currentWorm.transform.position);
+
+        }
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+
+            wid.ChangeType(-1);
+            nmp.DestoryChild();
+            InstantatePointOfMovement(currentWorm.transform.position);
+
+        }
+
+        
 
 
         if (currentWorm == null)
@@ -131,7 +173,7 @@ public class ControllerNavMesh : MonoBehaviour
             {
 
                 PressedWurm(hit.collider.gameObject);
-
+                
             }
             //if (digLocationPlaced)
             //{
@@ -468,19 +510,6 @@ public class ControllerNavMesh : MonoBehaviour
     bool AmIOutOfRange(string playerType, bool hittWall)
     {
 
-        //if (Mdistance == maxDistance && hit.collider.tag != "underground")
-        //{
-
-
-        //    return distance > Mdistance;
-        //}
-
-        //if (iShoot && notHittWall)
-        //{
-
-        //    return distance > MDistance;
-
-        //}
         if (playerType == "Canon" && hittWall)
         {
 
@@ -490,7 +519,7 @@ public class ControllerNavMesh : MonoBehaviour
         {
 
 
-            return distance > shootDistance;
+            return distance > shootDistance && currentWorm.GetComponent<Shooter>().AmIOutOfAmmo();
         }
         else
         {
@@ -514,6 +543,7 @@ public class ControllerNavMesh : MonoBehaviour
 
         hitPlayer = true;
         currentWorm = wurmorino;
+        Focus(currentWorm);
         nmp = currentWorm.GetComponent<NavMeshPlayer>();
         nmp.DestoryChild();
         wid = currentWorm.GetComponent<WhatIDo>();
@@ -521,6 +551,9 @@ public class ControllerNavMesh : MonoBehaviour
         pressedDown = true;
 
         TurnOfCollider(true);
+
+        
+
         //foreach (GameObject worm in worms)
         //{
 
@@ -592,6 +625,28 @@ public class ControllerNavMesh : MonoBehaviour
 
 
     }
+    public void RestartFocus()
+    {
+
+        currentAmountWurms = GameObject.FindGameObjectsWithTag(TurnOrder.CurrentPlayerName());
+        wurmInt = 0;
+        Focus(currentAmountWurms[0]);
+
+
+
+    }
+
+    public void Focus(GameObject worm)
+    {
+
+        currentWorm = worm;
+        cc.ChangeFocus(currentWorm);
+        wid = currentWorm.GetComponent<WhatIDo>();
+        nmp = currentWorm.GetComponent<NavMeshPlayer>();
+       // nmp.DestoryChild();
+    }
+
+
 
 
     //bool canIHitWorm()

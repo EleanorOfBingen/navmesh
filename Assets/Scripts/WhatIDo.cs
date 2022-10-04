@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WhatIDo : MonoBehaviour
 {
@@ -16,8 +18,16 @@ public class WhatIDo : MonoBehaviour
 
     [SerializeField] private string WhatTypeAmAI;
 
+    [SerializeField] private String[] whatICanDo;
+    private int whatID;
+
+    [SerializeField] private TMP_Text textstring;
+
     private void Start()
     {
+
+        whatICanDo = new String[]{"Attacker", "Canon"};
+
 
         shooter = GetComponent<Shooter>();
         nmp = GetComponent<NavMeshPlayer>();
@@ -112,6 +122,19 @@ public class WhatIDo : MonoBehaviour
 
         return WhatTypeAmAI;
     }
+
+    public void ChangeType(int changnmbr)
+    {
+
+        whatID += changnmbr;
+        whatID = Mathf.Clamp(whatID, 0, (whatICanDo.Length - 1));
+
+        WhatTypeAmAI = whatICanDo[whatID];
+        textstring.text = WhatTypeAmAI;
+
+    }
+
+    
 
 
 

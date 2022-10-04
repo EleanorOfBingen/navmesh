@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class Dig : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -26,9 +27,9 @@ public class Dig : MonoBehaviour
     [SerializeField] private GameObject hole;
 
     private float[] directionMovement;
- 
 
-
+    [SerializeField] private GameObject button;
+    
     void Start()
     {
 
@@ -80,7 +81,7 @@ public class Dig : MonoBehaviour
 
         if (moveToDig)
         {
-
+            Destroy(button);
             nma.Warp(digExit);
             nmPlayer.MovePosition(digExit);
             Debug.Log("Dig3");
@@ -95,7 +96,9 @@ public class Dig : MonoBehaviour
             nmPlayer.MoveWorm();
             
             CreateDigginHoles();
+           
             digginDone = false;
+
             
         }
         

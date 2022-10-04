@@ -7,7 +7,10 @@ public class Shooter : MonoBehaviour
 
     [SerializeField] private GameObject target;
 
+    private int bulletAmount = 1;
     private int bulletpain = 1;
+
+
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject childBullet;
@@ -26,7 +29,9 @@ public class Shooter : MonoBehaviour
 
         shotsFired = true;
 
-
+        bulletAmount--;
+        Debug.Log(bulletAmount);
+        Debug.Log(AmIOutOfAmmo());
     }
 
     public GameObject WhoAmIShooting(GameObject whomstIShoot)
@@ -63,6 +68,12 @@ public class Shooter : MonoBehaviour
         }
 
 
+    }
+    public bool AmIOutOfAmmo()
+    {
+
+        return bulletAmount < 1;
+        
     }
 
 

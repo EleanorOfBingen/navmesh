@@ -42,7 +42,7 @@ public class BulletShot : MonoBehaviour
             Debug.Log("FuckIHit");
             Shooter Father = myWorm.GetComponentInParent<Shooter>();
             Father.Hit();
-            DestroyImmediate(transform.gameObject);
+            Destroy(transform.gameObject);
 
 
 

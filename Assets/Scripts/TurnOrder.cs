@@ -60,6 +60,7 @@ public class TurnOrder : MonoBehaviour
         //player1 = GameObject.FindGameObjectsWithTag(CurrentPlayerName());
 
         timer = timerMax;
+        conNavMesh.RestartFocus();
 
     }
 
@@ -93,8 +94,8 @@ public class TurnOrder : MonoBehaviour
         {
 
             FindAllWorms();
-            cc.ChangeTagForFocus();
-
+            //cc.ChangeTagForFocus();
+            conNavMesh.RestartFocus();
         }
 
 

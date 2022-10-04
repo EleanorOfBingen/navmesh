@@ -89,7 +89,7 @@ public class NavMeshPlayer : MonoBehaviour
                 if (hit.collider.gameObject == attackedThingy)
                 {
 
-                    Debug.Log("CockMother");
+                  
 
                     attackedThingy.GetComponent<Health>().IlooseHealth(1);
                     agent.SetDestination(transform.position); // agent.SetDestination(transform.position);
@@ -322,6 +322,9 @@ public class NavMeshPlayer : MonoBehaviour
         
 
     }
+
+
+
 
 
 }
