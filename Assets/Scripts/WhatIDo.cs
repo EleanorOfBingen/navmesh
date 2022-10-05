@@ -21,14 +21,28 @@ public class WhatIDo : MonoBehaviour
     [SerializeField] private String[] whatICanDo;
     private int whatID;
 
-    [SerializeField] private TMP_Text textstring;
+    [SerializeField] private TMP_Text typeString;
+    [SerializeField] private TMP_Text ammoString;
+
+    [SerializeField] private int playerAmI;
+
+    [SerializeField] private Material[] materialPlayer;
+
+    [SerializeField] private Button bt;
+
+    private void Awake()
+    {
+
+        WhatPlayerDoIBelongTo(playerAmI);
+
+    }
 
     private void Start()
     {
 
-        whatICanDo = new String[]{"Attacker", "Canon"};
+        whatICanDo = new String[]{"Axe", "Cannon"};
 
-
+        ChangeType(0);
         shooter = GetComponent<Shooter>();
         nmp = GetComponent<NavMeshPlayer>();
         attack = GetComponent<Attack>();
@@ -58,7 +72,7 @@ public class WhatIDo : MonoBehaviour
         if(action == TurnOrder.Action2())
         {
 
-            if (WhatTypeAmAI == "Canon")
+            if (WhatTypeAmAI == "Cannon")
             {
                 shooter.Shoot();
             }
@@ -77,7 +91,7 @@ public class WhatIDo : MonoBehaviour
 
 
         }
-
+        ChangeType(0);
 
     }
 
@@ -91,7 +105,7 @@ public class WhatIDo : MonoBehaviour
         }
         if (action == TurnOrder.Action2())
         {
-            if (WhatTypeAmAI == "Canon")
+            if (WhatTypeAmAI == "Cannon")
             {
                 return GetComponent<Shooter>().ShotsDone();
             }
@@ -130,11 +144,39 @@ public class WhatIDo : MonoBehaviour
         whatID = Mathf.Clamp(whatID, 0, (whatICanDo.Length - 1));
 
         WhatTypeAmAI = whatICanDo[whatID];
-        textstring.text = WhatTypeAmAI;
+        typeString.text = WhatTypeAmAI;
+        if(WhatTypeAmAI == whatICanDo[1])
+        {
+            ammoString.text = "Ammo: " + GetComponent<Shooter>().HowMushAmmo();
+
+
+        }
+        else
+        {
+
+            ammoString.text = "";
+
+        }
+    }
+    public void WhatPlayerDoIBelongTo(int playerNumber)
+    {
+        gameObject.tag = "Player" + playerNumber.ToString();
+        gameObject.GetComponent<MeshRenderer>().material = materialPlayer[playerNumber]; 
+
+
+
+
+    }
+    public Button ThisButton()
+    {
+
+
+        return bt;
 
     }
 
-    
+
+
 
 
 

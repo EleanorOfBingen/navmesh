@@ -59,6 +59,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -289,6 +290,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   action: Move
   WhatTypeAmAI: 
+  whatICanDo: []
+  typeString: {fileID: 0}
+  ammoString: {fileID: 0}
+  playerAmI: 0
+  materialPlayer:
+  - {fileID: 2100000, guid: a61894ce2b34a6b46a53fed8741a06b6, type: 2}
+  - {fileID: 2100000, guid: c9383e6e9f4bd88468ce653f3ae825da, type: 2}
+  - {fileID: 2100000, guid: 4f5a71794f592284599e549b7c26cabb, type: 2}
+  - {fileID: 2100000, guid: 811832dbd26297c47806e6060bd12bec, type: 2}
 --- !u!114 &-7202870370526083803
 MonoBehaviour:
   m_ObjectHideFlags: 0

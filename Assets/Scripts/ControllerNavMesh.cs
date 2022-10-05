@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ControllerNavMesh : MonoBehaviour
@@ -67,6 +68,8 @@ public class ControllerNavMesh : MonoBehaviour
 
     private int whatIAmInt;
 
+
+    [SerializeField] private Button buttonToDig;
     //RaycastHit hit;
     // Start is called before the first frame update
     void Start()
@@ -489,7 +492,7 @@ public class ControllerNavMesh : MonoBehaviour
 
     void PointOfShot(GameObject targetWorm, string playerType)
     {
-        if (playerType == "Canon")
+        if (playerType == "Cannon")
         {
             currentWorm.GetComponent<Shooter>().WhoAmIShooting(targetWorm);
            
@@ -510,16 +513,16 @@ public class ControllerNavMesh : MonoBehaviour
     bool AmIOutOfRange(string playerType, bool hittWall)
     {
 
-        if (playerType == "Canon" && hittWall)
+        if (playerType == "Cannon" && hittWall)
         {
 
             return true;
 
-        }else if (playerType == "Canon" && !hittWall)
+        }else if (playerType == "Cannon" && !hittWall)
         {
 
 
-            return distance > shootDistance && currentWorm.GetComponent<Shooter>().AmIOutOfAmmo();
+            return distance > shootDistance || currentWorm.GetComponent<Shooter>().AmIOutOfAmmo();
         }
         else
         {
@@ -572,12 +575,13 @@ public class ControllerNavMesh : MonoBehaviour
     }
 
 
-    public void ClickToDig(Button digbutton)
+    public void ClickToDig(Button digButton)
     {
         //GameObject father = digbutton.gameObject.transform.parent.parent.gameObject;
         //PressedWurm(father);
         
-        currentWorm = digbutton.gameObject.transform.parent.parent.gameObject;
+        currentWorm = digButton.gameObject.transform.parent.parent.gameObject;
+        Debug.Log("IfImHappyAndIKnowIt");
         dig = true;
         nmp = currentWorm.GetComponent<NavMeshPlayer>();
         nmp.DestoryChild();
@@ -638,12 +642,29 @@ public class ControllerNavMesh : MonoBehaviour
 
     public void Focus(GameObject worm)
     {
+        if (buttonToDig == null)
+        {
+            
 
+        }
+        else
+        {
+            buttonToDig.image.enabled = false;
+            buttonToDig.transform.GetChild(0).gameObject.SetActive(false);
+
+        }
+     
         currentWorm = worm;
         cc.ChangeFocus(currentWorm);
+
         wid = currentWorm.GetComponent<WhatIDo>();
+        buttonToDig = wid.ThisButton();
+        buttonToDig.transform.GetChild(0).gameObject.SetActive(true);
+        //buttonToDig.enabled = true;
+        buttonToDig.image.enabled = true;
+        buttonToDig.onClick.AddListener(() => ClickToDig(wid.ThisButton()));
         nmp = currentWorm.GetComponent<NavMeshPlayer>();
-       // nmp.DestoryChild();
+        // nmp.DestoryChild();
     }
 
 

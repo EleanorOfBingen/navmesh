@@ -7,7 +7,7 @@ public class Shooter : MonoBehaviour
 
     [SerializeField] private GameObject target;
 
-    private int bulletAmount = 1;
+    private int bulletAmount = 2;
     private int bulletpain = 1;
 
 
@@ -74,6 +74,13 @@ public class Shooter : MonoBehaviour
 
         return bulletAmount < 1;
         
+    }
+
+    public int HowMushAmmo()
+    {
+
+        return bulletAmount;
+
     }
 
 

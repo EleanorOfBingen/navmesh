@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
     {
 
         health -= healthloss;
-        if(health < 0)
+        if(health <= 0)
         {
 
             Death();
