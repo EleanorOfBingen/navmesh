@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
     private float targetZoom;
     private float zoomSpeed = 3;
     [SerializeField] private float zoomLerpSpeed = 10;
+    [SerializeField] private float maxZoomOut = 20f;
 
     private CinemachineVirtualCamera cvc;
 
@@ -50,80 +51,49 @@ public class CameraController : MonoBehaviour
 
         if (TurnOrder.PlayerAnimationDone())
            {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //Vector3 mouseMove = Camera.main.WorldToScreenPoint(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit))
-                //{
+        
 
 
+           wurmInt = Mathf.Clamp(wurmInt, 0, (cubes.Length - 1));
 
-                // transform.position = hit.point;
 
+           
 
-                //}
+            
 
-                wurmInt = Mathf.Clamp(wurmInt, 0, (cubes.Length - 1));
-
-            if (Input.GetMouseButton(1))
+            if (startvalue)
             {
-
-                //cvc.Follow = transform;
-                //transform.position = Vector3.MoveTowards(transform.position, mouseMove, 1f);
-
-
-
-                if (Physics.Raycast(ray, out hit))
-                {
-
-
-                    cvc.Follow = transform;
-                    transform.position = Vector3.MoveTowards(transform.position, hit.point, 1f);
-
-
-
-
-
-
-                }
-
-
-            }
-            else
-            {
-
-                cvc.Follow = followingWurm.transform;
-
-                if (startvalue)
-                {
                     targetZoom = 10f;
                     startvalue = false;
-                }
-
             }
 
-            //if (Input.GetKeyUp(KeyCode.LeftArrow))
-            //{
-            //    wurmInt -= 1;
+            
 
 
-            //}
-            //if (Input.GetKeyUp(KeyCode.RightArrow))
-            //{
-            //    wurmInt += 1;
-
-
-            //}
         
 
 
 
             float scrolldata;
             scrolldata = Input.GetAxis("Mouse ScrollWheel");
-            //Debug.Log(scrolldata);
+            
+
+
+       
+            
+            cvc.Follow = followingWurm.transform;
 
             targetZoom -= scrolldata * zoomSpeed;
-           
+
+            if (targetZoom >= maxZoomOut)
+            {
+
+                cvc.Follow = initalTransform;
+
+
+
+            }
+
 
         }
         else
@@ -135,7 +105,7 @@ public class CameraController : MonoBehaviour
 
 
         }
-        targetZoom = Mathf.Clamp(targetZoom, 5f, 20f);
+        targetZoom = Mathf.Clamp(targetZoom, 5f, maxZoomOut + 5);
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, Time.deltaTime * zoomLerpSpeed);
 
 

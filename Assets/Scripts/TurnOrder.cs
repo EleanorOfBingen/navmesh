@@ -25,6 +25,8 @@ public class TurnOrder : MonoBehaviour
 
     [SerializeField] float timer;
     [SerializeField] float timerMax = 5f;
+    [SerializeField] float timerFinish;
+    [SerializeField] float timerMaxForRound = 15f;
 
 
     [SerializeField] bool endTurn;
@@ -40,24 +42,20 @@ public class TurnOrder : MonoBehaviour
 
         }
 
-        //player1 = GameObject.FindGameObjectsWithTag(CurrentPlayerName());
+    
     }
 
 
-    // Start is called before the first frame update
+
     void Start()
     {
 
-       // CameraController cameraController = GetComponent<CameraController>();
+
         conNavMesh = GetComponent<ControllerNavMesh>();
 
         currentPlayer = 0;
 
-        //SetAllWorms();
 
-        //Debug.Log(CurrentPlayerName());
-
-        //player1 = GameObject.FindGameObjectsWithTag(CurrentPlayerName());
 
         timer = timerMax;
         conNavMesh.RestartFocus();
@@ -67,26 +65,40 @@ public class TurnOrder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space) && PlayerAnimationDone())
+
+        if (PlayerAnimationDone())
         {
 
-            //Debug.Log("FINDTHEWORMS");
-            //FindAllWorms();
-            endTurn = true;
-          
-        }
+            //timerFinish = timerMaxForRound;
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
 
+                //Debug.Log("FINDTHEWORMS");
+                //FindAllWorms();
+                endTurn = true;
+                timerFinish = timerMaxForRound;
+            }
+
+
+        }
+        else
+        {
+
+            timerFinish -= Time.deltaTime;
+        }
+        
         if (endTurn)
         {
 
             timer -= Time.deltaTime;
+            //timerFinish -= Time.deltaTime;
 
         }
         else
         {
 
             timer = timerMax;
-
+            
         }
 
 
@@ -165,6 +177,12 @@ public class TurnOrder : MonoBehaviour
     {
         
         TurnOrder tO = GetInstance();
+        if(tO.timerFinish < 0)
+        {
+
+            return true;
+
+        }
         return tO.worms == tO.wormsPlayed && tO.endTurn == false;
 
     }

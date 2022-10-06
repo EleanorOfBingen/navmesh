@@ -68,6 +68,7 @@ public class ControllerNavMesh : MonoBehaviour
 
     private int whatIAmInt;
 
+    private bool iHaveDug;
 
     [SerializeField] private Button buttonToDig;
     //RaycastHit hit;
@@ -335,14 +336,7 @@ public class ControllerNavMesh : MonoBehaviour
             {
                 if (pressedDown)
                 {
-                    Debug.Log("YEE");
-                    /// CHEK IF I HIT SOMETHING ELENOR
-
-
-                    pressedDown = false;
-
-                    TurnOfCollider(false);
-
+                     
 
                     if (iShoot)
                     {
@@ -356,13 +350,7 @@ public class ControllerNavMesh : MonoBehaviour
                         }
 
                         //if (!iShoot)
-                        //{
-
-
-
-
-                        //    InstantatePointOfMovement(hit.point);
-                        //}
+                 
 
                     }
                     else if (!AmIOutOfRange("", ihitwall))
@@ -372,7 +360,9 @@ public class ControllerNavMesh : MonoBehaviour
 
                             digHole = hit.collider.gameObject;
                             Debug.Log("HighTide");
-                            digHole.GetComponent<HoleTeleport>().AddToList(currentWorm);
+                            nmp.DoITravelThroughHole(digHole);
+
+                            //digHole.GetComponent<HoleTeleport>().AddToList(currentWorm);
 
 
 
@@ -381,29 +371,17 @@ public class ControllerNavMesh : MonoBehaviour
                         }
                         else if(digHole != null)
                         {
-                            digHole = hit.collider.gameObject;
-                            digHole.GetComponent<HoleTeleport>().RemoveToList(currentWorm);
+                            //digHole = hit.collider.gameObject;
+                            //digHole.GetComponent<HoleTeleport>().RemoveToList(currentWorm);
 
 
                         }
                         
                         InstantatePointOfMovement(hit.point);
-                        //if (imGoingToEnterDigHole)
-                        //{
-                        //    digHole = hit.collider.gameObject;
-                        //    digHole.GetComponent<HoleTeleport>().AddToList(currentWorm);
 
-                        //    InstantatePointOfMovement(hit.point);
-                        //}
-                        //else
-                        //{
+                        pressedDown = false;
 
-                        //    InstantatePointOfMovement(hit.point);
-
-                        //}
-
-                        // InstantatePointOfMovement(hit.point);
-
+                        TurnOfCollider(false);
 
 
                     }
@@ -416,20 +394,7 @@ public class ControllerNavMesh : MonoBehaviour
 
 
                     }
-                   
 
-                   
-
-                    // moveAimer.SetActive(false);
-
-                    //    worms = GameObject.FindGameObjectsWithTag(TurnOrder.CurrentPlayerName());
-
-                    //    foreach (GameObject worm in worms)
-                    //    {
-
-                    //        worm.GetComponent<BoxCollider>().enabled = true;
-
-                    //    }
                 }
                
 
@@ -448,13 +413,7 @@ public class ControllerNavMesh : MonoBehaviour
 
     }
 
-    //public void SetActiveAimer(Vector3 mousePos)
-    //{
 
-    //    moveAimer.SetActive(true);
-    //    moveAimer.transform.position = mousePos;
-
-    //}
 
 
     public bool raycastHiting(RaycastHit ray)
@@ -471,11 +430,6 @@ public class ControllerNavMesh : MonoBehaviour
         Instantiate(pointOFMovement, new Vector3(positionInstantiate.x, positionInstantiate.y , positionInstantiate.z), transform.rotation, currentWorm.transform);
         nmp.MovePosition(positionInstantiate);
         wid.WhatActionDoIDo(TurnOrder.Action1());
-
-
-        //hitPlayer = false;
-        // pointOFMovement.transform.parent = currentWorm.transform;
-
 
     }
 
@@ -501,6 +455,7 @@ public class ControllerNavMesh : MonoBehaviour
         {
             //nmp.MovePosition(targetWorm.transform.position);
             nmp.WhoiAttack(targetWorm);
+            Debug.Log("yeeee");
 
         }
 
@@ -550,19 +505,12 @@ public class ControllerNavMesh : MonoBehaviour
         nmp = currentWorm.GetComponent<NavMeshPlayer>();
         nmp.DestoryChild();
         wid = currentWorm.GetComponent<WhatIDo>();
-        //worms = GameObject.FindGameObjectsWithTag(TurnOrder.CurrentPlayerName());
+   
         pressedDown = true;
 
         TurnOfCollider(true);
 
         
-
-        //foreach (GameObject worm in worms)
-        //{
-
-        //    worm.GetComponent<BoxCollider>().enabled = false;
-
-        //}
 
     }
 
@@ -577,8 +525,7 @@ public class ControllerNavMesh : MonoBehaviour
 
     public void ClickToDig(Button digButton)
     {
-        //GameObject father = digbutton.gameObject.transform.parent.parent.gameObject;
-        //PressedWurm(father);
+      
         
         currentWorm = digButton.gameObject.transform.parent.parent.gameObject;
         Debug.Log("IfImHappyAndIKnowIt");
@@ -589,16 +536,7 @@ public class ControllerNavMesh : MonoBehaviour
         digger = currentWorm.GetComponent<Dig>();
 
         TurnOfCollider(true);
-        // worms = GameObject.FindGameObjectsWithTag(TurnOrder.CurrentPlayerName());
-        //// pressedDown = true;
 
-
-        // foreach (GameObject worm in worms)
-        // {
-
-        //     worm.GetComponent<BoxCollider>().enabled = false;
-
-        // }
     }
 
     public void TurnOfCollider(bool turnOff)
@@ -640,6 +578,8 @@ public class ControllerNavMesh : MonoBehaviour
 
     }
 
+    
+
     public void Focus(GameObject worm)
     {
         if (buttonToDig == null)
@@ -647,35 +587,41 @@ public class ControllerNavMesh : MonoBehaviour
             
 
         }
-        else
+        else 
         {
             buttonToDig.image.enabled = false;
             buttonToDig.transform.GetChild(0).gameObject.SetActive(false);
 
+
         }
+
+
+
      
         currentWorm = worm;
         cc.ChangeFocus(currentWorm);
 
         wid = currentWorm.GetComponent<WhatIDo>();
         buttonToDig = wid.ThisButton();
-        buttonToDig.transform.GetChild(0).gameObject.SetActive(true);
-        //buttonToDig.enabled = true;
-        buttonToDig.image.enabled = true;
-        buttonToDig.onClick.AddListener(() => ClickToDig(wid.ThisButton()));
+        if(buttonToDig == null)
+        {
+
+
+        }
+        else
+        {
+            buttonToDig.transform.GetChild(0).gameObject.SetActive(true);
+            //buttonToDig.enabled = true;
+            buttonToDig.image.enabled = true;
+            buttonToDig.onClick.AddListener(() => ClickToDig(wid.ThisButton()));
+
+
+        }
+       
         nmp = currentWorm.GetComponent<NavMeshPlayer>();
-        // nmp.DestoryChild();
+ 
     }
 
-
-
-
-    //bool canIHitWorm()
-    //{
-
-
-
-    //}
 
 
 

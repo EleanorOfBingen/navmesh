@@ -802,6 +802,7 @@ MonoBehaviour:
   layerDefault: 0
   layerPlayer: 0
   distance: 0
+  maxTimer: 5
   attackedThingy: {fileID: 0}
 --- !u!114 &4812045843471191678
 MonoBehaviour:

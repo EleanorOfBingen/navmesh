@@ -30,13 +30,18 @@ public class HoleTeleport : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         
-        if (digginDwarfs.Contains(collision.gameObject))
+        if (digginDwarfs.Contains(collision.gameObject) && !TurnOrder.PlayerAnimationDone())
         {
-            Debug.Log("diggydiggyhole");
+            Debug.Log("diggydiggyhole" + collision.name);
             nma = collision.GetComponent<NavMeshAgent>();
             nma.Warp(digExit);
             nmPlayer = collision.GetComponent<NavMeshPlayer>();
-            nmPlayer.MovePosition(digExit + new Vector3(directionMovement[Random.Range(0, directionMovement.Length)], 0, directionMovement[Random.Range(0, directionMovement.Length)]));
+            //nmPlayer.MovePosition(digExit + new Vector3(directionMovement[Random.Range(0, directionMovement.Length)], 0, directionMovement[Random.Range(0, directionMovement.Length)]));
+
+            //nmPlayer.MoveWorm();
+
+            nmPlayer.PositionChange(digExit + new Vector3(directionMovement[Random.Range(0, directionMovement.Length)], 0, directionMovement[Random.Range(0, directionMovement.Length)]));
+            
             digginDwarfs.Remove(collision.gameObject);
 
 
@@ -73,6 +78,9 @@ public class HoleTeleport : MonoBehaviour
 
 
     }
+    
+
+    
     
 
 }

@@ -33,12 +33,20 @@ public class NavMeshPlayer : MonoBehaviour
     Vector2 positiontoTravellVector;
     Vector2 playerVector;
 
+    private bool readyToAttack;
 
     private float timer;
-    private float maxTimer = 10;
+    [SerializeField] private float maxTimer = 10;
     private bool attack;
 
+
+    private Vector3 whereToTravel;
     [SerializeField] private GameObject attackedThingy;
+
+
+    private GameObject whereIDig;
+    private bool ImGoingToDIg;
+
 
     void Start()
     {
@@ -59,7 +67,7 @@ public class NavMeshPlayer : MonoBehaviour
 
 
         positionToTravell = transform.position;
-
+        whereToTravel = transform.position;
 
 
     }
@@ -70,7 +78,41 @@ public class NavMeshPlayer : MonoBehaviour
         RaycastHit hit;
 
        
-        if(moveTime)
+
+
+
+        if (attack && attackedThingy != null)
+        {
+            if (Physics.Raycast(transform.position, attackedThingy.transform.position - transform.position, out hit, 1.5f))
+            {
+                if (hit.collider.gameObject == attackedThingy)
+                {
+                    
+                  
+                    
+
+                    attackedThingy.GetComponent<Health>().IlooseHealth(1);
+                    
+                    //attackedThingy.GetComponent<Health>().IlooseHealth(1);
+                    positionToTravell = transform.position;
+                    
+                    //agent.SetDestination(transform.position); // agent.SetDestination(transform.position);
+                    //moveTime = false;
+                    
+
+                    readyToAttack = false;
+                    attack = false;
+                }
+
+
+
+
+            }
+
+        }
+        
+        
+        if (moveTime)
         {
 
             agent.SetDestination(positionToTravell);
@@ -78,31 +120,13 @@ public class NavMeshPlayer : MonoBehaviour
             //lr.enabled = false;
             lineController(positionToTravell);
 
-            timer -= Time.deltaTime;
-        }
-
-
-        if (attack)
-        {
-            if (Physics.Raycast(transform.position, attackedThingy.transform.position - transform.position, out hit, 1.5f))
+            if (readyToAttack)
             {
-                if (hit.collider.gameObject == attackedThingy)
-                {
-
-                  
-
-                    attackedThingy.GetComponent<Health>().IlooseHealth(1);
-                    agent.SetDestination(transform.position); // agent.SetDestination(transform.position);
-                    //moveTime = false;
-                    attack = false;
-                    
-
-                }
-
-
-
+                attack = true;
 
             }
+
+            timer -= Time.deltaTime;
         }
 
 
@@ -119,45 +143,10 @@ public class NavMeshPlayer : MonoBehaviour
 
 
            moveTime = false;
-       
+          // readyToAttack = false;
 
 
         }
-
-        //if (attack && distance < 0.1)
-        //{
-
-        //    Debug.Log("Cock");
-        //    moveTime = false;
-
-        //    attackedThingy.GetComponent<Health>().IlooseHealth(1);
-        //    attack = false;
-
-
-        //}
-
-
-
-        //if (Physics.Raycast(transform.position, attackedThingy.transform.position - transform.position, out hit, 2f))
-        //{
-        //    if (hit.collider.gameObject == attackedThingy)
-        //    {
-
-        //        Debug.Log("CockMother");
-
-
-        //    }
-
-
-
-
-        //}
-
-
-
-        //TurnOrder.WormCount(ImDone());
-
-
 
 
     }
@@ -181,9 +170,9 @@ public class NavMeshPlayer : MonoBehaviour
     public Vector3 MovePosition(Vector3 endpos)
     {
 
-        timer = maxTimer;
+        
 
-        positionToTravell = endpos;
+        whereToTravel = endpos;
 
 
         return positionToTravell;
@@ -237,65 +226,52 @@ public class NavMeshPlayer : MonoBehaviour
 
     public void MoveWorm()
     {
+        timer = maxTimer;
+
+        positionToTravell = whereToTravel;
 
         moveTime = true;
+
+   
+
         DestoryChild();
+
+
+        if (ImGoingToDIg)
+        {
+            whereIDig.GetComponent<HoleTeleport>().AddToList(gameObject);
+
+
+        }
+
+
+    }
+
+    public void PositionChange(Vector3 ChangeMovementPlace)
+    {
+
+        positionToTravell = ChangeMovementPlace;
+
+
     }
 
     public void  WhoiAttack(GameObject whom)
     {
 
-        Debug.Log(whom.name);
+        Debug.Log("dad");
 
         attackedThingy = whom;
-        attack = true;
+        readyToAttack = true;
         //positionToTravell = whom.transform.position;
         MovePosition(whom.transform.position);
        // return attackedThingy;
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-        
-    //    if (collision.gameObject == attackedThingy)
-    //    {
 
-    //        Debug.Log("cockmuther");
-
-    //    }
-
-
-    //}
-
-
-
-
-    //public void WhatLayerAmI()
-    //{
-
-    //    if (gameObject.tag == TurnOrder.CurrentPlayerName())
-    //    {
-    //        gameObject.layer = layerDefault;
-
-
-
-    //    }
-    //    if(gameObject.tag != TurnOrder.CurrentPlayerName())
-    //    {
-
-    //        gameObject.layer = layerPlayer;
-
-
-
-    //    }
-
-
-
-    //}
     public int ImDone()
     {
-
-        if (ImAtLocation() && attack == false || timer < 0)
+       
+        if (ImAtLocation())
         {
 
 
@@ -320,6 +296,13 @@ public class NavMeshPlayer : MonoBehaviour
 
 
         
+
+    }
+
+    public void DoITravelThroughHole(GameObject digLocation)
+    {
+        whereIDig = digLocation;
+        ImGoingToDIg = true;
 
     }
 

@@ -46,37 +46,6 @@ public class Dig : MonoBehaviour
     void Update()
     {
 
-        // positiontoTravellVector = new Vector2(digEntrence.x, digEntrence.z);
-
-        // playerVector = new Vector2(transform.position.x, transform.position.z);
-
-
-        //if (moveToDig)
-        //{
-
-        //    Debug.Log("Dig2");
-
-
-
-
-        //    if (amther)
-        //    {
-
-        //        nma.Warp(digExit);
-        //        Debug.Log("Dig3");
-        //        nmPlayer.MovePosition(digExit);
-
-        //        moveToDig = false;
-
-        //    }
-
-        //}
-        //if (playerVector == positiontoTravellVector)
-        //{
-        //    amther = true;
-
-
-        //}
 
 
         if (moveToDig)
